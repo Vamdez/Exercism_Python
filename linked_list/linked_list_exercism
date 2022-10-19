@@ -1,0 +1,62 @@
+class Node:
+    def __init__(self, values = None, next = None):
+        self.data = values
+        self.prox = next
+
+    def value(self):
+        return self.data
+
+    def next(self):
+        return self.prox
+
+
+class LinkedList:
+    def __init__(self, values=[]):
+        self.header = None
+        self.insert_multiples_values(values)
+
+    def __len__(self):
+        count = 0
+        itr = self.header
+        while itr:
+            count += 1
+            itr = itr.prox
+        return count
+        
+    def head(self):
+        if self.header is None:
+            raise EmptyListException("The list is empty.")
+        return(self.header)
+        
+    def insert_multiples_values(self, list_values):
+        for value in list_values:
+            self.push(value)
+            
+    def push(self, values):
+        node = Node(values, self.header)
+        self.header = node.data
+        print(self.header)
+
+    def print(self):
+        if self.header is None:
+            raise EmptyListException("The list is empty.")
+        itr = self.header
+        valuestr = ''
+        while itr:
+            valuestr += str(itr) + ' --> '
+            itr = itr.prox
+        print(valuestr)
+
+    def pop(self):
+        pass
+
+    def reversed(self):
+        pass
+
+
+class EmptyListException(Exception):
+    def __init__(self, message):
+        self.message = message
+
+
+ll = LinkedList([1,4,5,7,9,2])

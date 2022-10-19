@@ -29,8 +29,7 @@ class LinkedList:
 
     def print(self):
         if self.head is None:
-            print('Linked List is empty')
-            return
+            raise EmptyListException("The list is empty.")
         itr = self.head
         valuestr = ''
         while itr:
@@ -48,8 +47,7 @@ class LinkedList:
 
     def header(self):
         if self.head is None:
-            print('Linked List is empty')
-            return
+            raise EmptyListException("The list is empty.")
         print(str(self.head.value))
 
     def pop(self, value_pop):
@@ -72,13 +70,15 @@ class LinkedList:
 
 
 class EmptyListException(Exception):
-    pass
+    def __init__(self, message):
+        self.message = message
 
 
 ll = LinkedList()
 ll.insert_at_begining(13)
-ll.insert_multiples_values([10,20,30,40,50,60,70,80,90])
-ll.pop(60)
-ll.pop(80)
+ll.insert_at_begining(15)
+ll.insert_at_begining(7)
+ll.insert_at_begining(187)
+ll.insert_at_begining(156)
 ll.__len__()
 ll.print()
