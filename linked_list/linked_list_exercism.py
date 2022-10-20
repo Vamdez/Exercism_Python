@@ -1,3 +1,7 @@
+from audioop import reverse
+from cmath import tau
+
+
 class Node:
     def __init__(self, values = None, next = None):
         self.data = values
@@ -34,29 +38,34 @@ class LinkedList:
             
     def push(self, values):
         node = Node(values, self.header)
-        self.header = node.data
-        print(self.header)
-
-    def print(self):
-        if self.header is None:
-            raise EmptyListException("The list is empty.")
-        itr = self.header
-        valuestr = ''
-        while itr:
-            valuestr += str(itr) + ' --> '
-            itr = itr.prox
-        print(valuestr)
+        self.header = node
 
     def pop(self):
-        pass
+        if self.header is None:
+            raise EmptyListException("The list is empty.")
+        pop_value = self.header
+        self.header = self.header.prox
+        return pop_value.data
 
     def reversed(self):
-        pass
+        tail_for_head = []
+        itr = self.header
+        while itr:
+            tail_for_head.append(itr.data)
+            itr = itr.prox
+        tail_for_head.reverse()
+        return tail_for_head
+
+    def __iter__(self):
+        itr = self.header
+        while itr:
+            yield itr.data
+            itr = itr.prox
 
 
 class EmptyListException(Exception):
     def __init__(self, message):
         self.message = message
 
-
-ll = LinkedList([1,4,5,7,9,2])
+ll = LinkedList([1,3,4,6,8,12,34])
+print(ll.reversed())
