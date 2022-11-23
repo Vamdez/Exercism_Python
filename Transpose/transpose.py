@@ -1,24 +1,53 @@
-import itertools
+def linesize(lines):
+    resp = []
+    for linhas in lines:
+        resp.append(len(linhas))
+    return max(resp)    
+
 def transpose(lines):
-    resp = temp = ''
+    if not lines:
+        return ""
+    lines = lines.split("\n")
+    maior = linesize(lines)
+    valorLinha = ""
     count = 0
-    leng = len(sorted(lines, key=lambda x: len(x))[-1])
-    nw_lines = []
-    for itens in lines:
-        while len(itens) != leng:
-            itens += ' '
-        nw_lines.append(itens)
-    print(nw_lines)
+    if type(lines) != list:
+        lines = [lines]
     while True:
-        for itens in nw_lines:
-            temp += itens[count]
-        resp += f'{temp}\n'
+        for linha in lines:
+            if len(linha) <= count:
+                valorLinha += '&'
+                continue
+            valorLinha += linha[count]
         count += 1
-        temp = ''
-        if count > len(lines[0]):
+        valorLinha = valorLinha.rstrip("&")
+        if count == maior:
             break
-    return resp
+        valorLinha += "\n"
+    valorLinha = valorLinha.replace("&", " ")
+    return valorLinha
 
-
-X = transpose(["AB", "DEF"])
-print(X)
+lines = ["The longest line.", "A long line.", "A longer line.", "A line."]
+expected = [
+    "TAAA",
+    "h   ",
+    "elll",
+    " ooi",
+    "lnnn",
+    "ogge",
+    "n e.",
+    "glr",
+    "ei ",
+    "snl",
+    "tei",
+    " .n",
+    "l e",
+    "i .",
+    "n",
+    "e",
+    ".",
+]
+print("||".join(expected))
+print('----------')
+print(transpose("\n".join(lines)))
+print(transpose("\n".join(lines))== "\n".join(expected))
