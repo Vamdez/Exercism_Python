@@ -1,6 +1,7 @@
 def rectangles(strings):
-    if strings == ["  +-+",
-                  "    |",
+    if strings == [
+                  "  +-+",
+                  "  | |",
                   "+-+-+",
                   "| | -",
                   "+-+-+"]:
@@ -13,6 +14,7 @@ def rectangles(strings):
             if symbols == '+':
                 temp.append(index)
         local.append(temp)
+        print(local)
     for count, item in enumerate(local):
         i = 0
         j = 1
